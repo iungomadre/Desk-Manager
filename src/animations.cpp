@@ -5,7 +5,7 @@
 #include "../include/components.h"
 
 
-void Animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels)
+void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels)
 {
     switch(animationID)
     {

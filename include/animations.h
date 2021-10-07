@@ -7,7 +7,7 @@
 #define ANIMATION_1         1
 #define ANIMATION_2         2
 
-void Animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels);
+void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels);
 /*
 Performs animation based on their ID
 

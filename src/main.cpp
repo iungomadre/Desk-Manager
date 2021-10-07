@@ -62,7 +62,7 @@ void setup() {
   server.begin();
   
   // włączenie animacji rozpoczęcia
-  Animate(ENTRY_ANIMATION, brightness, pixels);
+  animate(ENTRY_ANIMATION, brightness, pixels);
 }
 
 void loop() {
@@ -75,8 +75,8 @@ void loop() {
   digitalWrite(LAMP_OUT, lamp.getStatus());
 
   // włączenie animacji
-  if(playAnimation1) Animate(ANIMATION_1, brightness, pixels);
-  if(playAnimation2) Animate(ANIMATION_2, brightness, pixels);
+  if(playAnimation1) animate(ANIMATION_1, brightness, pixels);
+  if(playAnimation2) animate(ANIMATION_2, brightness, pixels);
 
   // wyświetlenie strony HTML - do całkowitego przerobienia
   client = server.available();
