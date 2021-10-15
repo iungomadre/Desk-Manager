@@ -6,10 +6,13 @@
 #include <ESP8266WiFi.h>
 #include "../include/animations.h"
 #include "../include/components.h"
+#include "../include/setup.h"
 
 // konfiguracja sieci
-#define SSID        "iungomadre"   // Tu wpisz nazwę sieci Wi-Fi, z która ma się to urządzenie połączyć
+#define SSID        "iungomadre"  // Tu wpisz nazwę sieci Wi-Fi, z która ma się to urządzenie połączyć
 #define PASSWORD    "lodowka112"  // Tu wpisz hasło do swojego Wi-Fi
+
+#define CONNECTION_TIMEOUT 60     // maksymalna ilość prób połączenia z siecią WiFi
 
 // zmienne
 Adafruit_NeoPixel pixels(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -35,34 +38,34 @@ int timewate, Length;
 unsigned long myTime = 0;
 
 
-void setup() {
-// poniższy kod zostanie uruchomiony raz
-  
+void initialiseLEDs(Adafruit_NeoPixel& LEDs, float initialBrightness)
+{
+  LEDs.begin();
+  animate(ENTRY_ANIMATION, initialBrightness, LEDs);
+}
+
+void connectWiFi(char* wifi_ssid, char* wifi_password, ESP8266WiFiClass& wifi_module)
+// Próbuje połączyć się z siecią WiFi
+{
+  wifi_module.begin(wifi_ssid, wifi_password);
+  for (int i = 0; wifi_module.status() != WL_CONNECTED || i != CONNECTION_TIMEOUT; i++)
+    delay(500);
+}
+
+void startHosting()
+{
+
+}
+
+void setup()
+{
   pinMode(LAMP_OUT,OUTPUT);
   pinMode(LAMP_SWITCH,INPUT_PULLUP);
 
-  // włączenie monitorowania w porcie 9600
-  Serial.begin(9600);
-
-  // włączenie paska LED
-  pixels.begin();               
-
-  // łączenie z Wi-Fi
-  WiFi.begin(SSID, PASSWORD);
-  Serial.print("Connecting to Wi-Fi");
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.print("\nConnected, IP address: ");
-  Serial.println(WiFi.localIP());
-
-  // włączenie hosta strony
-  server.begin();
-  
-  // włączenie animacji rozpoczęcia
-  animate(ENTRY_ANIMATION, brightness, pixels);
+  initialiseSerialConnection(Serial, 9600);
+  initialiseLEDs(pixels, brightness);
+  connectWiFi(SSID, PASSWORD, WiFi);
+  //start hosting???
 }
 
 void loop() {
