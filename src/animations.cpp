@@ -1,8 +1,8 @@
 // animations.cpp
 
 #include <Adafruit_NeoPixel.h>
-#include "../include/animations.h"
-#include "../include/components.h"
+#include "../include/animations.hpp"
+#include "../include/components.hpp"
 
 
 void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels)

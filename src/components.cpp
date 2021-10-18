@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 #include <math.h>
-#include "../include/components.h"
+#include "../include/components.hpp"
 
 
 void setColor(short red, short green, short blue, float brightness, Adafruit_NeoPixel &pixels)

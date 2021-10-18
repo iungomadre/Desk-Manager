@@ -4,15 +4,14 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 #include <ESP8266WiFi.h>
-#include "../include/animations.h"
-#include "../include/components.h"
-#include "../include/setup.h"
+#include "../include/animations.hpp"
+#include "../include/components.hpp"
+#include "../include/setup.hpp"
 
 // konfiguracja sieci
-#define SSID        "iungomadre"  // Tu wpisz nazwę sieci Wi-Fi, z która ma się to urządzenie połączyć
-#define PASSWORD    "lodowka112"  // Tu wpisz hasło do swojego Wi-Fi
+#define SSID        "home san oke dyk pastafarialand"
+#define PASSWORD    "niechBedzieWielbionaJegoKluskowatosc"
 
-#define CONNECTION_TIMEOUT 60     // maksymalna ilość prób połączenia z siecią WiFi
 
 // zmienne
 Adafruit_NeoPixel pixels(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -37,35 +36,43 @@ int number;
 int timewate, Length;
 unsigned long myTime = 0;
 
-
-void initialiseLEDs(Adafruit_NeoPixel& LEDs, float initialBrightness)
+void promptNotConnected()
 {
-  LEDs.begin();
-  animate(ENTRY_ANIMATION, initialBrightness, LEDs);
+  Serial.println("Cannot connect to WiFi - connection timeout.");
+  Serial.println("Reset board to retry or check your WiFi settings\n...\n");
 }
 
-void connectWiFi(char* wifi_ssid, char* wifi_password, ESP8266WiFiClass& wifi_module)
-// Próbuje połączyć się z siecią WiFi
+void promptConnected()
 {
-  wifi_module.begin(wifi_ssid, wifi_password);
-  for (int i = 0; wifi_module.status() != WL_CONNECTED || i != CONNECTION_TIMEOUT; i++)
-    delay(500);
+  Serial.println("Succesfully connected to WiFi. Starting program");
 }
 
-void startHosting()
+void halt()
 {
-
+  while(true)
+    delay(10000);
 }
 
 void setup()
 {
-  pinMode(LAMP_OUT,OUTPUT);
-  pinMode(LAMP_SWITCH,INPUT_PULLUP);
+  pinMode(LAMP_OUT, OUTPUT);
+  pinMode(LAMP_SWITCH, INPUT_PULLUP);
+  
+  Serial.begin(9600);
+  pixels.begin();
 
-  initialiseSerialConnection(Serial, 9600);
-  initialiseLEDs(pixels, brightness);
-  connectWiFi(SSID, PASSWORD, WiFi);
-  //start hosting???
+  if(connectWiFi(SSID, PASSWORD, WiFi) == CONNECTION_TIMEOUT_ERROR)
+  {
+    promptNotConnected();
+    halt();
+  }
+  else
+  {
+    promptConnected();
+    animate(ENTRY_ANIMATION, brightness, pixels);
+  }
+
+  server.begin();
 }
 
 void loop() {

@@ -1,3 +1,6 @@
+// add.hpp
+// mock file created to test native unit tests
+
 #if !defined(_ADD_H)
 #define _ADD_H
 

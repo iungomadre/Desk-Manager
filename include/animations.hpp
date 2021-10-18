@@ -1,4 +1,4 @@
-// animations.h
+// animations.hpp
 
 #if !defined(_ANIMATIONS_H)
 #define _ANIMATIONS_H

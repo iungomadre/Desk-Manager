@@ -1,4 +1,4 @@
-// components.h
+// components.hpp
 
 // this file conatins all the basic components
 // NOTE!!! name "components" is temporary, all the stuff in this file is going to be moved anyway
@@ -62,5 +62,6 @@ public:
 
 void checkButtonPressed(Relay &lamp, unsigned long &time);
 // toggles lamp on and off after clicking physical button
+
 
 #endif // _COMPONENTS_H
