@@ -10,4 +10,13 @@
 int connectWiFi(char* wifi_ssid, char* wifi_password, ESP8266WiFiClass& wifi_module);
 // connects to wifi network. returns CONNECTION_TIMEOUT_ERROR when unavailable
 
+void promptNotConnected();
+// informs user, that could not connect to wifi
+
+void promptConnected();
+// informs user, that he succesfully connected to wifi
+
+void halt();
+// stops machine, but does not shut it down (still consumes power etc)
+
 #endif // _SETUP_H

@@ -15,3 +15,20 @@ int connectWiFi(char* wifi_ssid, char* wifi_password, ESP8266WiFiClass& wifi_mod
   }
   return CONNECTION_TIMEOUT_ERROR;
 }
+
+void promptNotConnected()
+{
+  Serial.println("Cannot connect to WiFi - connection timeout.");
+  Serial.println("Reset board to retry or check your WiFi settings\n...\n");
+}
+
+void promptConnected()
+{
+  Serial.println("Succesfully connected to WiFi. Starting program");
+}
+
+void halt()
+{
+  while(true)
+    delay(10000);
+}

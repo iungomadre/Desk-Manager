@@ -36,23 +36,6 @@ int number;
 int timewate, Length;
 unsigned long myTime = 0;
 
-void promptNotConnected()
-{
-  Serial.println("Cannot connect to WiFi - connection timeout.");
-  Serial.println("Reset board to retry or check your WiFi settings\n...\n");
-}
-
-void promptConnected()
-{
-  Serial.println("Succesfully connected to WiFi. Starting program");
-}
-
-void halt()
-{
-  while(true)
-    delay(10000);
-}
-
 void setup()
 {
   pinMode(LAMP_OUT, OUTPUT);
