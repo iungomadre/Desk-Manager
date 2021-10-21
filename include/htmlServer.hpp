@@ -5,27 +5,23 @@
 #define _HEML_SERVER_HPP
 
 #include <ESP8266WiFi.h>
+#include <./components.hpp>
 
 #define CLIENT_NOT_AVAILABLE_ERROR -1
 #define CLIENT_UNREACHABLE_ERROR -2
+#define CLIENT_OK 1
 
-void hostHTML();
-// sends html code and reads reply from available client
 
 int getAvailableClient(WiFiServer& from, WiFiClient& to);
 // finds available client connected to server
 
-void executeGetRequest();
-// modifies board variables to match client request
-
-void printHTML();
-// prints HTML to available client
+void printHTML(WiFiClient& client);
+// sends HTML code to available client
 
 // decoders:
-void decodeRequestedBrightness(String request, float& brightness);
-void decodeRequestedAnimations(String request, bool* animationsToPlay);
 void decodeRequestedColors(String request, int& red, int& green, int& blue);
-
-
+void decodeRequestedAnimations(String request, bool* animationsToPlay);
+void decodeRequestedBrightness(String request, float& brightness);
+void decodeRequestedLampSwitch(String request, Relay& lamp)
 
 #endif // _HEML_SERVER_HPP

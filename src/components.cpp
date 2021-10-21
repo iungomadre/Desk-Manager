@@ -39,4 +39,6 @@ void Relay::toggle()
         status = OFF;
     else
         status = ON;
+
+    digitalWrite(LAMP_OUT, status);
 };
