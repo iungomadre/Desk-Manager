@@ -13,6 +13,10 @@
 #define LAMP_OUT        D0
 #define LAMP_SWITCH     D5
 
+#define RED_OUT         D2  // TODO
+#define GREEN_OUT       D1
+#define BLUE_OUT        D3
+
 #define ON              1
 #define OFF             0
 #define BUTTON_PRESSED  0

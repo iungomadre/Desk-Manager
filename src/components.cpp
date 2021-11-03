@@ -19,6 +19,10 @@ void setColor(short red, short green, short blue, float brightness, Adafruit_Neo
         delay(5);
         pixels.show();
     }
+    
+    analogWrite(RED_OUT, static_cast<int>(map(red, 0, 255, 0, 1023) * brightness));
+    analogWrite(GREEN_OUT, static_cast<int>(map(green, 0, 255, 0, 1023) * brightness));
+    analogWrite(BLUE_OUT, static_cast<int>(map(blue, 0, 255, 0, 1023) * brightness)); 
 }
 
 void checkButtonPressed(Relay &lamp, unsigned long &time)
