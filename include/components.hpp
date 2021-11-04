@@ -1,21 +1,25 @@
 // components.hpp
 
-// this file conatins all the basic components
-// NOTE!!! name "components" is temporary, all the stuff in this file is going to be moved anyway
-
 #ifndef _COMPONENTS_H
 #define _COMPONENTS_H
+
+#include <Adafruit_NeoPixel.h>
 
 #define CONNECTION_OK   0
 #define NUMPIXELS       15
 
+// programmable
 #define LED_PIN         D4
 #define LAMP_OUT        D0
 #define LAMP_SWITCH     D5
 
+// RGB
 #define RED_OUT         D2  // TODO
-#define GREEN_OUT       D1
-#define BLUE_OUT        D3
+#define GREEN_OUT       D1  // TODO
+#define BLUE_OUT        D3  // TODO
+
+// mono
+#define LED_MONO_OUT    D6  // TODO
 
 #define ON              1
 #define OFF             0
@@ -67,5 +71,7 @@ public:
 void checkButtonPressed(Relay &lamp, unsigned long &time);
 // toggles lamp on and off after clicking physical button
 
+void setMonoLEDbrightness(float brightness);
+// changes brightness of mono LED. For turning off set 0
 
 #endif // _COMPONENTS_H

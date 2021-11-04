@@ -34,6 +34,10 @@ void setup()
 {
   pinMode(LAMP_OUT, OUTPUT);
   pinMode(LAMP_SWITCH, INPUT_PULLUP);
+  pinMode(RED_OUT, OUTPUT);
+  pinMode(GREEN_OUT, OUTPUT);
+  pinMode(BLUE_OUT, OUTPUT);
+  pinMode(LED_MONO_OUT, OUTPUT);
   
   Serial.begin(9600);
   pixels.begin();

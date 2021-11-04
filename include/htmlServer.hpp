@@ -22,6 +22,6 @@ void printHTML(WiFiClient& client);
 void decodeRequestedColors(String request, int& red, int& green, int& blue);
 void decodeRequestedAnimations(String request, bool* animationsToPlay);
 void decodeRequestedBrightness(String request, float& brightness);
-void decodeRequestedLampSwitch(String request, Relay& lamp)
+void decodeRequestedLampSwitch(String request, Relay& lamp);
 
 #endif // _HEML_SERVER_HPP

@@ -3,10 +3,11 @@
 #if !defined(_ANIMATIONS_H)
 #define _ANIMATIONS_H
 
-#define ENTRY_ANIMATION     0
-#define ANIMATION_1         1
-#define ANIMATION_2         2
-#define ENTRY_ANIMATION_RGB 3       
+#define ENTRY_ANIMATION         0
+#define ANIMATION_1             1
+#define ANIMATION_2             2
+#define ENTRY_ANIMATION_RGB     3
+#define ENTRY_ANIMATION_MONO    4   
 
 void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels);
 /*

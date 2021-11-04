@@ -9,9 +9,9 @@
 void setColor(short red, short green, short blue, float brightness, Adafruit_NeoPixel &pixels)
 {
     // assert red, green and blue are positive and <256
-    Serial.println(red);
-    Serial.println(green);
-    Serial.println(blue);
+    // Serial.println(red);
+    // Serial.println(green);
+    // Serial.println(blue);
 
     for (unsigned long i = 0; i < NUMPIXELS; i++)
     {
@@ -44,5 +44,10 @@ void Relay::toggle()
     else
         status = ON;
 
-    digitalWrite(LAMP_OUT, status);
+    digitalWrite(pin, status);
 };
+
+void setMonoLEDbrightness(float brightness)
+{
+  analogWrite(LED_MONO_OUT, 1023 * brightness);
+}

@@ -69,6 +69,22 @@ void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixe
         
         setColor(255, 255, 255, 1, pixels);
         break;
+    
+    case ENTRY_ANIMATION_MONO:
+        setMonoLEDbrightness(1);
+        delay(100);
+
+        setMonoLEDbrightness(0);
+        delay(100);
+
+        setMonoLEDbrightness(1);
+        delay(100);
+
+        setMonoLEDbrightness(0);
+        delay(100);
+
+        setMonoLEDbrightness(1);
+        break;
 
     default:
         Serial.println("Cannot perform animation of ID given");

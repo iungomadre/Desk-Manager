@@ -26,7 +26,7 @@ int getAvailableClient(WiFiServer& from, WiFiClient& to)
 void decodeRequestedColors(String request, int& red, int& green, int& blue)
 {
     String colorHex = "";
-    int i = 0;
+    unsigned int i = 0;
     
     if (request.charAt(5) != '%');
     else
@@ -35,7 +35,7 @@ void decodeRequestedColors(String request, int& red, int& green, int& blue)
         {
         if (request.charAt(i) == '%' && request.charAt(i + 1) == '2' && request.charAt(i + 2) == '3')
         {
-            for (int m = i + 3; m < i + 9; m++) colorHex += request.charAt(m);
+            for (unsigned int m = i + 3; m < i + 9; m++) colorHex += request.charAt(m);
             break;
         }
         i++;
@@ -43,6 +43,9 @@ void decodeRequestedColors(String request, int& red, int& green, int& blue)
 
         int number;
         number = (int) strtoll(&colorHex[0], NULL, 16);
+
+        Serial.print("#");
+        Serial.println(colorHex);
 
         red = number >> 16;
         green = number >> 8 & 0xFF;
