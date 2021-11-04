@@ -3,26 +3,19 @@
 #if !defined(_ANIMATIONS_H)
 #define _ANIMATIONS_H
 
-#define ENTRY_ANIMATION         0
-#define ANIMATION_1             1
-#define ANIMATION_2             2
-#define ENTRY_ANIMATION_RGB     3
-#define ENTRY_ANIMATION_MONO    4   
+#define NUM_ANIMATIONS          5   // ilość wszystkich animacji
 
-void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels);
-/*
-Performs animation based on their ID
+#define MONO_ANIMATION_1        0
+#define PIXELS_ENTRY_ANIMATION  1
+#define PIXELS_ANIMATION_1      2
+#define PIXELS_ANIMATION_2      3
+#define RGB_ANIMATION_1         4
 
-Params:
--------
-animationID: unsigned int
-    ID of animation to perform
+void animatePixels(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels);
 
-brightness: float
-    brightness of animation
+void animateRGB(unsigned int animationID);
 
-pixels: Adafruit_Neopixel&
-    reference to Adafruit_Neopixel object controlling LED's
-*/
+void animateMONO(unsigned int animationID);
+
 
 #endif // _ANIMATIONS_H

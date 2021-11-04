@@ -6,52 +6,43 @@
 #include <Adafruit_NeoPixel.h>
 
 #define CONNECTION_OK   0
-#define NUMPIXELS       15
+#define NUMPIXELS       15  // ilość LED'ów w pasku
 
-// programmable
-#define LED_PIN         D4
+// ESP board
 #define LAMP_OUT        D0
 #define LAMP_SWITCH     D5
+
+// Pixels
+#define LED_PIN         D4
 
 // RGB
 #define RED_OUT         D2  // TODO
 #define GREEN_OUT       D1  // TODO
 #define BLUE_OUT        D3  // TODO
 
-// mono
+// MONO
 #define LED_MONO_OUT    D6  // TODO
 
+// Relay
 #define ON              1
 #define OFF             0
 #define BUTTON_PRESSED  0
 
-void setColor(short red, short green, short blue, float brightness, Adafruit_NeoPixel &pixels);
-/*
-Sets color of LEDs
+void setPixelsColor(short red, short green, short blue, float brightness, Adafruit_NeoPixel &pixels);
+// Sets color of pixels
 
-Params:
--------
-red: short
-    8-bit value of red factor (value must be between 0 and 256)
+void setRGBcolor(short red, short green, short blue, float brightness);
+// Sets color of RGB
 
-green: short
-    8-bit value of green factor (value must be between 0 and 256) <---------- czy na pewno???
-
-blue: short
-    8-bit value of blue factor
-
-brightness: float
-    brightness of LED to be set (value must be between 0 and 256)
-
-pixels: Adafruit_Neopixel&
-    reference to Adafruit_Neopixel object controlling LED's
-*/
+void setMONObrightness(float brightness);
+// Changes brightness of mono LED. For turning off set 0
 
 class Relay
+// Represents physical Relay
 {
 private:
-    bool status;    // is turned ON or  OFF
-    int pin;        // chyba niepotrzebne, więc może klasa też niepotrzebna
+    bool status;    // turned ON or  OFF
+    int pin;        // ESP pin that Relay is connected to
 
 public:
     // Default constructor disabled
@@ -69,9 +60,7 @@ public:
 };
 
 void checkButtonPressed(Relay &lamp, unsigned long &time);
-// toggles lamp on and off after clicking physical button
+// toggles lamp ON or OFF after clicking physical button
 
-void setMonoLEDbrightness(float brightness);
-// changes brightness of mono LED. For turning off set 0
 
 #endif // _COMPONENTS_H

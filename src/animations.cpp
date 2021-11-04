@@ -5,11 +5,11 @@
 #include "../include/components.hpp"
 
 
-void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels)
+void animatePixels(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixels)
 {
     switch(animationID)
     {
-    case ENTRY_ANIMATION:
+    case PIXELS_ENTRY_ANIMATION:
         for (int i = 0; i < NUMPIXELS; i++)
         {
             pixels.setPixelColor(i,0,200,0);
@@ -24,7 +24,7 @@ void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixe
         }
         break;
 
-    case ANIMATION_1:
+    case PIXELS_ANIMATION_1:
         for (int i = 0; i < NUMPIXELS; i++)
         {
             pixels.setPixelColor(i,
@@ -36,7 +36,7 @@ void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixe
         pixels.show();
         break;
 
-    case ANIMATION_2:
+    case PIXELS_ANIMATION_2:
         for(int i = 0; i < NUMPIXELS; i++)
         {
             pixels.setPixelColor(i, 
@@ -56,34 +56,56 @@ void animate(unsigned int animationID, float brightness, Adafruit_NeoPixel &pixe
             delay(50);
         }
         break;
-    
-    case ENTRY_ANIMATION_RGB:
-        setColor(255, 0, 0, 1, pixels);
+
+    default:
+        Serial.println("Cannot perform animation of ID given");
+        return;
+    }
+
+}
+
+void animateRGB(unsigned int animationID)
+{
+    switch(animationID)
+    {
+    case RGB_ANIMATION_1:
+        setRGBcolor(255, 0, 0, 1);
         delay(500);
         
-        setColor(0, 255, 0, 1, pixels);
+        setRGBcolor(0, 255, 0, 1);
         delay(500);
         
-        setColor(0, 0, 255, 1, pixels);
+        setRGBcolor(0, 0, 255, 1);
         delay(500);
         
-        setColor(255, 255, 255, 1, pixels);
+        setRGBcolor(255, 255, 255, 1);
         break;
-    
-    case ENTRY_ANIMATION_MONO:
-        setMonoLEDbrightness(1);
+
+    default:
+        Serial.println("Cannot perform animation of ID given");
+        return;
+    }
+
+}
+
+void animateMONO(unsigned int animationID)
+{
+    switch(animationID)
+    {
+    case MONO_ANIMATION_1:
+        setMONObrightness(1);
         delay(100);
 
-        setMonoLEDbrightness(0);
+        setMONObrightness(0);
         delay(100);
 
-        setMonoLEDbrightness(1);
+        setMONObrightness(1);
         delay(100);
 
-        setMonoLEDbrightness(0);
+        setMONObrightness(0);
         delay(100);
 
-        setMonoLEDbrightness(1);
+        setMONObrightness(1);
         break;
 
     default:

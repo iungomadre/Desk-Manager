@@ -17,6 +17,6 @@ void promptConnected();
 // informs user, that he succesfully connected to wifi
 
 void halt();
-// stops machine, but does not shut it down (still consumes power etc)
+// stops board, but does not shut it down (still consumes power, etc.)
 
 #endif // _SETUP_H

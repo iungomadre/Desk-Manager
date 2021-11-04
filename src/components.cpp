@@ -2,39 +2,29 @@
 
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
-#include <math.h>
 #include "../include/components.hpp"
 
 
-void setColor(short red, short green, short blue, float brightness, Adafruit_NeoPixel &pixels)
+void setPixelsColor(short red, short green, short blue, float brightness, Adafruit_NeoPixel &pixels)
 {
-    // assert red, green and blue are positive and <256
-    // Serial.println(red);
-    // Serial.println(green);
-    // Serial.println(blue);
-
     for (unsigned long i = 0; i < NUMPIXELS; i++)
     {
         pixels.setPixelColor(i, red*brightness, green*brightness, blue*brightness);
         delay(5);
         pixels.show();
     }
-    
+}
+
+void setRGBcolor(short red, short green, short blue, float brightness)
+{
     analogWrite(RED_OUT, static_cast<int>(map(red, 0, 255, 0, 1023) * brightness));
     analogWrite(GREEN_OUT, static_cast<int>(map(green, 0, 255, 0, 1023) * brightness));
     analogWrite(BLUE_OUT, static_cast<int>(map(blue, 0, 255, 0, 1023) * brightness)); 
 }
 
-void checkButtonPressed(Relay &lamp, unsigned long &time)
+void setMONObrightness(float brightness)
 {
-    bool buttonPressed;
-    if(abs(millis() - time > 100))
-    {
-        time = millis();
-        buttonPressed = digitalRead(LAMP_SWITCH);
-        if(buttonPressed == BUTTON_PRESSED)
-            lamp.toggle();
-    }
+  analogWrite(LED_MONO_OUT, 1023 * brightness);
 }
 
 void Relay::toggle()
@@ -47,7 +37,14 @@ void Relay::toggle()
     digitalWrite(pin, status);
 };
 
-void setMonoLEDbrightness(float brightness)
+void checkButtonPressed(Relay &lamp, unsigned long &time)
 {
-  analogWrite(LED_MONO_OUT, 1023 * brightness);
+    bool buttonPressed;
+    if(millis() - time > 250)
+    {
+        time = millis();
+        buttonPressed = digitalRead(LAMP_SWITCH);
+        if(buttonPressed == BUTTON_PRESSED)
+            lamp.toggle();
+    }
 }
