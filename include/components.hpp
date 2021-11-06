@@ -25,6 +25,7 @@
 #define ON              1
 #define OFF             0
 #define BUTTON_PRESSED  0
+#define MIN_PRESS_DIFF  100  // milliseconds - minimal time between relay button presses
 
 
 void setPixelsColor(short red, short green, short blue, float brightness, Adafruit_NeoPixel &pixels);

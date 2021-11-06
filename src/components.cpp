@@ -40,7 +40,7 @@ void Relay::toggle()
 void checkButtonPressed(Relay &lamp, unsigned long &time)
 {
     bool buttonPressed;
-    if(millis() - time > 250)
+    if(millis() - time > MIN_PRESS_DIFF)
     {
         time = millis();
         buttonPressed = digitalRead(LAMP_SWITCH);
