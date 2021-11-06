@@ -13,7 +13,7 @@
 #define PASSWORD    "niechBedzieWielbionaJegoKluskowatosc"
 
 // konfiguracja świecidełek
-#define _PIXELS
+// #define _PIXELS
 // #define _RGB
 // #define _MONO
 
@@ -107,12 +107,12 @@ void loop() {
 
     #ifdef _RGB
     setRGBcolor(red, green, blue, brightness);
-    if(playAnimation[RGB_ANIMATION_1]) animate(RGB_ANIMATION_1, brightness, pixels);
+    if(playAnimation[RGB_ANIMATION_1]) animateRGB(RGB_ANIMATION_1);
     #endif
 
     #ifdef _MONO
-    setMonoLEDbrightness(brightness);
-    if(playAnimation[MONO_ANIMATION_1]) animate(MONO_ANIMATION_1, brightness, pixels);
+    setMONObrightness(brightness);
+    if(playAnimation[MONO_ANIMATION_1]) animateMONO(MONO_ANIMATION_1);
     #endif
   }
 }
