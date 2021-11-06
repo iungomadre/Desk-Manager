@@ -5,15 +5,13 @@
 
 #include <Adafruit_NeoPixel.h>
 
-#define CONNECTION_OK   0
-#define NUMPIXELS       15  // ilość LED'ów w pasku
-
 // ESP board
 #define LAMP_OUT        D0
 #define LAMP_SWITCH     D5
 
 // Pixels
 #define LED_PIN         D4
+#define NUMPIXELS       15  // ilość LED'ów w pasku
 
 // RGB
 #define RED_OUT         D2  // TODO
@@ -27,6 +25,7 @@
 #define ON              1
 #define OFF             0
 #define BUTTON_PRESSED  0
+
 
 void setPixelsColor(short red, short green, short blue, float brightness, Adafruit_NeoPixel &pixels);
 // Sets color of pixels
