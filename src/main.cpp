@@ -55,6 +55,7 @@ void setup()
   } else
   {
     promptConnected();
+    Serial.println(WiFi.localIP());
     
     // włącz wejściowe animacje
     #ifdef _PIXELS
