@@ -5,6 +5,26 @@
 #include "../include/components.hpp"
 #include "../include/animations.hpp"
 
+int getAvailableClient(WiFiClient& client, WiFiServer& server)
+{
+    client = server.available();
+    if (!client)
+        return CLIENT_NOT_AVAILABLE_ERROR;
+
+    unsigned int timewate = 0;
+    while (!client.available())
+    {
+        delay(1);
+        timewate = timewate + 1;
+        if (timewate > 1800)
+        {
+            //timeout
+            client.stop();
+            return CLIENT_NOT_AVAILABLE_ERROR;
+        }
+    }
+    return 0;
+}
 
 void decodeRequestedColors(String& request, int& red, int& green, int& blue)
 {

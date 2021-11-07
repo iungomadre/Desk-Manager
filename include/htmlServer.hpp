@@ -7,6 +7,9 @@
 #include <ESP8266WiFi.h>
 #include <./components.hpp>
 
+#define CLIENT_NOT_AVAILABLE_ERROR -1
+
+int getAvailableClient(WiFiClient& client, WiFiServer& server);
 
 void printHTML(WiFiClient& client);
 // sends HTML code to available client

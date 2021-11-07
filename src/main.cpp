@@ -13,7 +13,7 @@
 #define PASSWORD    "niechBedzieWielbionaJegoKluskowatosc"
 
 // konfiguracja świecidełek
-// #define _PIXELS
+#define _PIXELS
 // #define _RGB
 // #define _MONO
 
@@ -79,41 +79,43 @@ void setup()
 }
 
 
-void loop() {
+void loop() 
+{
 // poniższy kod będzie uruchamiany w pętli
 
   // sprawdzenie, czy został wciśnięty fizyczny przycisk na płytce
   checkButtonPressed(lamp, myTime);
 
-  // sprawdzenie, czy dostępny klient
-  client = server.available();
-  if (client.available())
-  {
-    // wyświetlanie strony
-    printHTML(client);
+  // nawiązywanie połączenia z klientem
+  int clientStatus = getAvailableClient(client, server);
+  if(clientStatus == CLIENT_NOT_AVAILABLE_ERROR)
+      return;
+  
 
-    // modyfikacja zmiennych na podstawie requesta
-    request = client.readStringUntil('\r');
-    decodeRequestedColors(request, red, green, blue);
-    decodeRequestedAnimations(request, playAnimation);
-    decodeRequestedBrightness(request, brightness);
-    decodeRequestedLampSwitch(request, lamp);
+  // wyświetlenie strony
+  printHTML(client);
 
-    // wykonanie poleceń na podstawie zmiennych
-    #ifdef _PIXELS
-    setPixelsColor(red, green, blue, brightness, pixels);
-    if(playAnimation[PIXELS_ANIMATION_1]) animatePixels(PIXELS_ANIMATION_1, brightness, pixels);
-    if(playAnimation[PIXELS_ANIMATION_2]) animatePixels(PIXELS_ANIMATION_2, brightness, pixels);
-    #endif // _PIXELS
+  // modyfikacja zmiennych na podstawie requesta
+  request = client.readStringUntil('\r');
+  decodeRequestedColors(request, red, green, blue);
+  decodeRequestedAnimations(request, playAnimation);
+  decodeRequestedBrightness(request, brightness);
+  decodeRequestedLampSwitch(request, lamp);
 
-    #ifdef _RGB
-    setRGBcolor(red, green, blue, brightness);
-    if(playAnimation[RGB_ANIMATION_1]) animateRGB(RGB_ANIMATION_1);
-    #endif
+  // wykonanie poleceń na podstawie zmiennych
+  #ifdef _PIXELS
+  setPixelsColor(red, green, blue, brightness, pixels);
+  if(playAnimation[PIXELS_ANIMATION_1]) animatePixels(PIXELS_ANIMATION_1, brightness, pixels);
+  if(playAnimation[PIXELS_ANIMATION_2]) animatePixels(PIXELS_ANIMATION_2, brightness, pixels);
+  #endif // _PIXELS
 
-    #ifdef _MONO
-    setMONObrightness(brightness);
-    if(playAnimation[MONO_ANIMATION_1]) animateMONO(MONO_ANIMATION_1);
-    #endif
-  }
+  #ifdef _RGB
+  setRGBcolor(red, green, blue, brightness);
+  if(playAnimation[RGB_ANIMATION_1]) animateRGB(RGB_ANIMATION_1);
+  #endif
+
+  #ifdef _MONO
+  setMONObrightness(brightness);
+  if(playAnimation[MONO_ANIMATION_1]) animateMONO(MONO_ANIMATION_1);
+  #endif
 }
