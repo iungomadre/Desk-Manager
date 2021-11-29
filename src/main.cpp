@@ -9,13 +9,49 @@
 #include "../include/htmlServer.hpp"
 
 // konfiguracja sieci
-#define SSID        "home san oke dyk pastafarialand"
-#define PASSWORD    "niechBedzieWielbionaJegoKluskowatosc"
+#define SSID        "nazwa"
+#define PASSWORD    "haslong"
 
 // konfiguracja świecidełek
-#define _PIXELS
-// #define _RGB
+// #define _PIXELS
+ #define _RGB
 // #define _MONO
+
+//ŁUKASZOWE ZMIENNE
+
+const int sampleWindow = 10; // Sample window width in mS (50 mS = 20Hz)
+unsigned int sample;
+int signalMax, signalMin, peakToPeak;
+unsigned long startMillis;
+
+//ŁUKASZOWA FUNKCJA
+
+void micro()
+{
+  signalMin = 1024;
+  signalMax = 0;
+  startMillis = millis();
+  while((millis() - startMillis < sampleWindow))
+  {
+    sample = analogRead(A0);
+      if (sample < 1024)  // toss out spurious readings
+      {
+         if (sample > signalMax)
+         {
+            signalMax = sample;  // save just the max levels
+         }
+          else if (sample < signalMin)
+         {
+            signalMin = sample;  // save just the min levels
+         }
+      }
+    peakToPeak = signalMax - signalMin;
+    Serial.println(peakToPeak);
+    setRGBcolor(peakToPeak, 0, 0, 1);
+  }
+}
+
+//KONIEC
 
 // zmienne do obsługi strony HTML 
 WiFiServer server(80);
@@ -42,6 +78,7 @@ void setup()
   pinMode(GREEN_OUT, OUTPUT);
   pinMode(BLUE_OUT, OUTPUT);
   pinMode(LED_MONO_OUT, OUTPUT);
+  pinMode(A0,INPUT); //MIKROFON
   
   Serial.begin(9600);
   pixels.begin();
@@ -76,12 +113,18 @@ void setup()
 
   // ustaw animacje jako domyślnie wyłączone
   for(int i = 0; i < NUM_ANIMATIONS; i++) playAnimation[i] = false;
+
+  //ŁUKASZOWY TIMER
+  startMillis= millis();
 }
 
 
 void loop() 
 {
 // poniższy kod będzie uruchamiany w pętli
+
+  //MIKROFON
+  micro();
 
   // sprawdzenie, czy został wciśnięty fizyczny przycisk na płytce
   checkButtonPressed(lamp, myTime);
