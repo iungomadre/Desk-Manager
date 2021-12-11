@@ -68,6 +68,11 @@ void decodeRequestedAnimations(String& request, bool* animationsToPlay)
         animationsToPlay[PIXELS_ANIMATION_1] = false;
         animationsToPlay[PIXELS_ANIMATION_2] = true;
     }
+
+    else if (request.indexOf("/MUSICSYNC") != -1)
+    {
+        //tu wrzucić żeby funkcję mikrofonu odpalał (jest w mainie, linie 20-54)
+    }
 }
 
 void decodeRequestedBrightness(String& request, float& brightness)
